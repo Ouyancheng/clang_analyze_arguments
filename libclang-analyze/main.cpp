@@ -19,7 +19,7 @@ int main(int argc, const char * argv[]) {
     // std::cout << "Hello, World!\n";
     CXIndex index = clang_createIndex(0, 0);
     CXTranslationUnit unit = clang_parseTranslationUnit(index,
-                                                        "/Volumes/Data/Workspaces/CPPWORKSPACE/libclang-analyze/source.cpp",
+                                                        argv[1],
                                                         nullptr, 0, nullptr, 0,
                                                         CXTranslationUnit_None);
     if (!unit) {
