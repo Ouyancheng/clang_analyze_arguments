@@ -37,12 +37,13 @@ int main(int argc, const char * argv[]) {
 //                            }
                             if (clang_getCursorKind(c) == CXCursor_CXXMethod) {
                                 int n = 0;
-                                cout << "Method" << endl;
+                                // cout << "Method" << endl;
                                 while (!clang_isInvalid(clang_getCursorKind(clang_Cursor_getArgument(c, n)))) {
                                     ++n;
                                 }
                                 if (n >= 3) {
-                                    fprintf(stderr, "Warning: more than 3 arguments\n");
+                                    cerr << "Warning: Method '" << clang_getCursorSpelling(c)
+                                    << "' has more than 3 arguments" << endl;
                                 }
                             }
                             return CXChildVisit_Recurse;
