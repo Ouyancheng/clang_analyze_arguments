@@ -31,11 +31,10 @@ int main(int argc, const char * argv[]) {
                         [](CXCursor c, CXCursor parent, CXClientData clientdata){
 //                            cout << "Cursor: " << clang_getCursorSpelling(c)
 //                            << " Kind: " << clang_getCursorKindSpelling(clang_getCursorKind(c)) << endl;
-//                            if (clang_getCursorKind(c) == CXCursor_CXXMethod) {
-//                                cout << "Hello method" << endl;
-//                                cout << clang_getCursorSpelling(clang_Cursor_getArgument(c, 1)) << endl;
-//                            }
-                            if (clang_getCursorKind(c) == CXCursor_CXXMethod) {
+                            
+                            if (clang_getCursorKind(c) == CXCursor_CXXMethod
+                                || clang_getCursorKind(c) == CXCursor_FunctionTemplate
+                                || clang_getCursorKind(c) == CXCursor_FunctionDecl) {
                                 int n = 0;
                                 // cout << "Method" << endl;
                                 while (!clang_isInvalid(clang_getCursorKind(clang_Cursor_getArgument(c, n)))) {
