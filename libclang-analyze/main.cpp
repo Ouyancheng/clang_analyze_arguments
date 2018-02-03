@@ -26,15 +26,24 @@ int main(int argc, const char * argv[]) {
         fprintf(stderr, "Error opening file");
         return -1;
     }
-    cout << "Success!" << endl;
     CXCursor cursor = clang_getTranslationUnitCursor(unit);
     clang_visitChildren(cursor,
                         [](CXCursor c, CXCursor parent, CXClientData clientdata){
-                            cout << "Cursor: " << clang_getCursorSpelling(c)
-                            << " Kind: " << clang_getCursorKindSpelling(clang_getCursorKind(c)) << endl;
+//                            cout << "Cursor: " << clang_getCursorSpelling(c)
+//                            << " Kind: " << clang_getCursorKindSpelling(clang_getCursorKind(c)) << endl;
+//                            if (clang_getCursorKind(c) == CXCursor_CXXMethod) {
+//                                cout << "Hello method" << endl;
+//                                cout << clang_getCursorSpelling(clang_Cursor_getArgument(c, 1)) << endl;
+//                            }
                             if (clang_getCursorKind(c) == CXCursor_CXXMethod) {
-                                cout << "Hello method" << endl;
-                                cout << clang_getCursorSpelling(clang_Cursor_getArgument(c, 0)) << endl;
+                                int n = 0;
+                                cout << "Method" << endl;
+                                while (!clang_isInvalid(clang_getCursorKind(clang_Cursor_getArgument(c, n)))) {
+                                    ++n;
+                                }
+                                if (n >= 3) {
+                                    fprintf(stderr, "Warning: more than 3 arguments\n");
+                                }
                             }
                             return CXChildVisit_Recurse;
                             
