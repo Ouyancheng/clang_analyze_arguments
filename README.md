@@ -14,5 +14,5 @@ Go to libclang-analyze.
 
 Then type cmake . and make to generate the executable file.
 
-Usage: clang_analyze_arguments <file>
+Usage: clang_analyze_arguments \<file\>
 
